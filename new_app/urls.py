@@ -1,5 +1,5 @@
 from django.urls import path
-from setuptools.extern import names
+
 
 from new_app import views
 # from new_app.views import createTodo
@@ -7,6 +7,7 @@ from new_app import views
 urlpatterns = [
     path('',views.index,name="index"),
     path('dashboard',views.dashboard,name="dashboard"),
-    path('viewtodo',views.view_todo,name="view_todo")
-    # path('Todo',views.createTodo,name="createTodo")
+    path('view_todo',views.view_todo,name="view_todo"),
+    path('delete_todo/<int:id>',views.delete_todo,name="delete_todo"),
+    path('edit_todo/<int:id>', views.edit_todo, name="edit_todo"),
 ]

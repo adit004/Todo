@@ -31,6 +31,21 @@ def dashboard(request):
 
 def view_todo(request):
     data = Todo.objects.all()
-    print(data)
     return render(request,'views.html',{'view':data})
 
+# delete
+def delete_todo(request,id):
+    data = Todo.objects.get(id=id)
+    data.delete()
+    return redirect('view_todo')
+
+#update
+def edit_todo(request,id):
+    data = Todo.objects.get(id=id)
+    form = TodoForms(instance=data)
+    if request.method == 'POST':
+        form1 = TodoForms(request.POST,instance=data)
+        if form1.is_valid():
+            form1.save()
+            return redirect('view_todo')
+    return render(request,'update.html',{'form':form})
